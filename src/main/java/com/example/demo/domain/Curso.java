@@ -4,6 +4,7 @@ package com.example.demo.domain;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -18,14 +19,17 @@ import jakarta.persistence.OneToMany;
 import lombok.Data;
 @Entity
 @Data
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property="id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property="idCurso")
 public class Curso {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long idCurso;
 	private String nombreCurso;
+	
 	@ManyToOne
+	@JsonBackReference
 	private Profesor profesor;
+	
 	@OneToMany(mappedBy = "curso", cascade = CascadeType.REMOVE)
 	@JsonManagedReference
 	private List<Notas> notas;

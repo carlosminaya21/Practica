@@ -54,8 +54,11 @@
 		<dependency>
              <groupId>jakarta.validation</groupId>
              <artifactId>jakarta.validation-api</artifactId>
-             <version>3.0.0</version> <!-- O la versión más reciente disponible -->
+            
         </dependency>
+      
+
+
 	</dependencies>
 
 	<build>

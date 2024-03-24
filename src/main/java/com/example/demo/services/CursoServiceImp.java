@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.domain.Curso;
+import com.example.demo.domain.Profesor;
 import com.example.demo.repositories.CursoRepository;
+import com.example.demo.repositories.ProfesorRepository;
 
 import jakarta.transaction.Transactional;
 
@@ -15,6 +17,8 @@ public class CursoServiceImp implements CursoService {
 
 	@Autowired
 	private CursoRepository cursRepo;
+	@Autowired
+	private ProfesorRepository proRepo;
 	
 	
 	@Override
@@ -42,6 +46,16 @@ public class CursoServiceImp implements CursoService {
 		cursRepo.deleteById(id);
 		// TODO Auto-generated method stub
 
+	}
+	
+	@Override
+	@Transactional
+	public Curso asignarProfesor(Long idCur,Long idProfe) {
+		Curso curso = cursRepo.findById(idCur).orElseThrow(null);
+		Profesor profesor = proRepo.findById(idProfe).orElseThrow(null);
+		curso.setProfesor(profesor);
+		return cursRepo.save(curso);
+				
 	}
 
 }

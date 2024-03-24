@@ -4,6 +4,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,6 +19,7 @@ import lombok.Data;
 
 @Entity
 @Data
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property="idProfesor")
 public class Profesor implements Serializable{
 
 	private static final long serialVersionUID=1L;
@@ -27,6 +33,7 @@ public class Profesor implements Serializable{
 	private String direccion;
 	@Column (unique = true)
 	private String email;
-	@OneToMany(mappedBy = "profesor")	          
-	private List<Curso> curso = new ArrayList<>();
+	@OneToMany(mappedBy = "profesor", cascade = CascadeType.REMOVE)
+	@JsonManagedReference
+	private List<Curso> curso;
 }

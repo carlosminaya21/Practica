@@ -3,6 +3,8 @@ package com.example.demo.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,7 +36,7 @@ public class CursoController {
 	}
 	
 	@PutMapping("/{id}")
-	public Curso editarCurso(@PathVariable Long id,@RequestBody @Valid Curso curso) {
+	public Curso editarCurso(@PathVariable Long id,@RequestBody Curso curso) {
 		return cursSer.Editar(curso, id);
 	}
 	
@@ -42,5 +44,25 @@ public class CursoController {
 	public void eliminarCurso(@PathVariable Long id) {
 		cursSer.eliminar(id);
 	}
+	
+	// ASIGNAR UN PROFESOR A UN CURSO
+	/*
+	 * @PutMapping(value = "/{idCur}/profesor/{idProfe}")
+    public ResponseEntity<Curso> asignarProfesor(@PathVariable Long idCur, @PathVariable Long idProfe) {
+        Curso curso = cursSer.asignarProfesor(idCur, idProfe);
+        if (curso != null) {
+            return new ResponseEntity<>(curso, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+	 * */
 
+	@PutMapping(value = "/{idCur}/profesor/{idProfe}")
+	public Curso asignarProfesor(@PathVariable Long idCur,@PathVariable Long idProfe) {
+		return cursSer.asignarProfesor(idCur, idProfe);
+	}
+
+	 
+	
 }

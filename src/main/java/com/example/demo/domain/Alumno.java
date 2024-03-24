@@ -5,6 +5,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,10 +20,10 @@ import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import lombok.Data;
 import jakarta.validation.constraints.Digits;
-import jakarta.validation.constraints.Pattern;
 
 @Entity
 @Data
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property="idAlumno")
 public class Alumno implements Serializable{
 
 	private static final long serialVersionUID=1L;
@@ -35,6 +40,7 @@ public class Alumno implements Serializable{
 	private String direccion;
 	@Column (unique = true)
 	private String email;
-	@OneToMany(mappedBy = "alumno")	          
-	private List<Notas> notas = new ArrayList<>();
+	@OneToMany(mappedBy = "alumno", cascade = CascadeType.REMOVE)	
+	@JsonManagedReference
+	private List<Notas> notas;
 }

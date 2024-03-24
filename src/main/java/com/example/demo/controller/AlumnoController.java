@@ -29,12 +29,12 @@ public class AlumnoController {
 	}
 	
 	@PostMapping
-	public Alumno crearAlumno(@RequestBody @Valid  Alumno alumno) {
+	public Alumno crearAlumno(@RequestBody Alumno alumno) {
 		return alumService.grabar(alumno);
 	}
 	
 	@PutMapping("/{id}")
-	public Alumno editarAlumno(@PathVariable Long id,@RequestBody @Valid Alumno alum) {
+	public Alumno editarAlumno(@PathVariable Long id,@RequestBody Alumno alum) {
 		return alumService.editar(alum, id);
 	}
 	

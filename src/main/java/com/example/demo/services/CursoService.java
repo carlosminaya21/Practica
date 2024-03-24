@@ -9,5 +9,6 @@ public interface CursoService {
 	Curso grabar(Curso curso);
 	Curso Editar(Curso curso, Long id);
 	void eliminar(Long id); 
+	Curso asignarProfesor (Long idCur,Long idProfe);
 
 }

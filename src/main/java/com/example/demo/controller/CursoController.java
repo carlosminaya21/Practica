@@ -45,18 +45,6 @@ public class CursoController {
 		cursSer.eliminar(id);
 	}
 	
-	// ASIGNAR UN PROFESOR A UN CURSO
-	/*
-	 * @PutMapping(value = "/{idCur}/profesor/{idProfe}")
-    public ResponseEntity<Curso> asignarProfesor(@PathVariable Long idCur, @PathVariable Long idProfe) {
-        Curso curso = cursSer.asignarProfesor(idCur, idProfe);
-        if (curso != null) {
-            return new ResponseEntity<>(curso, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-	 * */
 
 	@PutMapping(value = "/{idCur}/profesor/{idProfe}")
 	public Curso asignarProfesor(@PathVariable Long idCur,@PathVariable Long idProfe) {
